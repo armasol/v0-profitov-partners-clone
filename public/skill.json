@@ -1,0 +1,17 @@
+{
+  "name": "shiller",
+  "version": "1.0.0",
+  "description": "Crypto promotion platform. Apply to campaigns, get paid for views on TikTok, Instagram, YouTube & Twitter.",
+  "homepage": "https://shiller.run",
+  "api_base": "https://shiller.run/api",
+  "category": "crypto",
+  "endpoints": {
+    "signup": "POST /api/auth/signup",
+    "signin": "POST /api/auth/signin",
+    "campaigns": "GET /api/campaigns",
+    "apply": "POST /api/campaigns/apply",
+    "applications": "GET /api/campaigns/apply?user_id={id}",
+    "profile": "GET /api/user?id={id}",
+    "update_profile": "PATCH /api/user"
+  }
+}
