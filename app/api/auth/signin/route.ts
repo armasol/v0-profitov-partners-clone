@@ -39,9 +39,13 @@ export async function POST(request: Request) {
         balance: user.balance || 0,
       },
     })
-  } catch {
+  } catch (error) {
+    console.error("Signin error:", error)
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Database unavailable. Please ensure Supabase is active.",
+        details: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     )
   }

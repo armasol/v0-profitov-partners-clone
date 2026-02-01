@@ -63,9 +63,13 @@ export async function POST(request: Request) {
         user_type: data.user_type,
       },
     })
-  } catch {
+  } catch (error) {
+    console.error("Signup error:", error)
     return NextResponse.json(
-      { error: "Internal server error" },
+      { 
+        error: "Database unavailable. Please ensure Supabase is active.",
+        details: error instanceof Error ? error.message : "Unknown error"
+      },
       { status: 500 }
     )
   }
