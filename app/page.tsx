@@ -10,10 +10,11 @@ export default function Home() {
   return (
     <div className="min-h-screen w-full overflow-y-auto bg-[#0a0a0a]">
       <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: "url('https://profitov.partners/static/img/home-bg-desktop.jpg')",
           backgroundPosition: "center center",
+          backgroundAttachment: "fixed",
         }}
       />
 
