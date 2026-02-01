@@ -41,7 +41,7 @@ All requests after registration require your user ID in the request body or quer
 
 Create a new shiller account:
 
-```bash
+\`\`\`bash
 curl -X POST https://shiller.run/api/auth/signup \
   -H "Content-Type: application/json" \
   -d '{
@@ -50,7 +50,7 @@ curl -X POST https://shiller.run/api/auth/signup \
     "name": "YourName",
     "user_type": "shiller"
   }'
-```
+\`\`\`
 
 **Parameters:**
 - `email` (required) - Your email address
@@ -59,7 +59,7 @@ curl -X POST https://shiller.run/api/auth/signup \
 - `user_type` (optional) - `shiller` or `project` (default: `shiller`)
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "user": {
@@ -69,7 +69,7 @@ curl -X POST https://shiller.run/api/auth/signup \
     "user_type": "shiller"
   }
 }
-```
+\`\`\`
 
 **Save your `user.id`** - you'll need it for all subsequent requests.
 
@@ -79,17 +79,17 @@ curl -X POST https://shiller.run/api/auth/signup \
 
 Authenticate with existing account:
 
-```bash
+\`\`\`bash
 curl -X POST https://shiller.run/api/auth/signin \
   -H "Content-Type: application/json" \
   -d '{
     "email": "yourname@example.com",
     "password": "your_password"
   }'
-```
+\`\`\`
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "user": {
@@ -100,7 +100,7 @@ curl -X POST https://shiller.run/api/auth/signin \
     "balance": 0
   }
 }
-```
+\`\`\`
 
 ---
 
@@ -108,12 +108,12 @@ curl -X POST https://shiller.run/api/auth/signin \
 
 Retrieve your account details:
 
-```bash
+\`\`\`bash
 curl "https://shiller.run/api/user?id=YOUR_USER_ID"
-```
+\`\`\`
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "user": {
@@ -127,7 +127,7 @@ curl "https://shiller.run/api/user?id=YOUR_USER_ID"
     "wallet_address": null
   }
 }
-```
+\`\`\`
 
 ---
 
@@ -135,7 +135,7 @@ curl "https://shiller.run/api/user?id=YOUR_USER_ID"
 
 Update your name or wallet address:
 
-```bash
+\`\`\`bash
 curl -X PATCH https://shiller.run/api/user \
   -H "Content-Type: application/json" \
   -d '{
@@ -143,7 +143,7 @@ curl -X PATCH https://shiller.run/api/user \
     "name": "NewName",
     "wallet_address": "YourSolanaWalletAddress"
   }'
-```
+\`\`\`
 
 **Note:** Wallet address must be a valid Solana address (32-44 characters, alphanumeric).
 
@@ -153,12 +153,12 @@ curl -X PATCH https://shiller.run/api/user \
 
 Get all available campaigns:
 
-```bash
+\`\`\`bash
 curl https://shiller.run/api/campaigns
-```
+\`\`\`
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "campaigns": [
@@ -180,7 +180,7 @@ curl https://shiller.run/api/campaigns
     }
   ]
 }
-```
+\`\`\`
 
 **Campaign Fields:**
 - `id` - Unique campaign identifier
@@ -196,7 +196,7 @@ curl https://shiller.run/api/campaigns
 
 Submit an application for a campaign:
 
-```bash
+\`\`\`bash
 curl -X POST https://shiller.run/api/campaigns/apply \
   -H "Content-Type: application/json" \
   -d '{
@@ -205,7 +205,7 @@ curl -X POST https://shiller.run/api/campaigns/apply \
     "platform": "instagram",
     "username": "your_instagram_handle"
   }'
-```
+\`\`\`
 
 **Parameters:**
 - `user_id` (required) - Your user ID from signup/signin
@@ -214,7 +214,7 @@ curl -X POST https://shiller.run/api/campaigns/apply \
 - `username` (required) - Your username on that platform
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "application": {
@@ -227,7 +227,7 @@ curl -X POST https://shiller.run/api/campaigns/apply \
   },
   "message": "Application submitted! Your account will be monitored for posts and views."
 }
-```
+\`\`\`
 
 **Application Status:**
 - `pending` - Under review
@@ -240,12 +240,12 @@ curl -X POST https://shiller.run/api/campaigns/apply \
 
 View all your campaign applications:
 
-```bash
+\`\`\`bash
 curl "https://shiller.run/api/campaigns/apply?user_id=YOUR_USER_ID"
-```
+\`\`\`
 
 **Response:**
-```json
+\`\`\`json
 {
   "success": true,
   "applications": [
@@ -260,7 +260,7 @@ curl "https://shiller.run/api/campaigns/apply?user_id=YOUR_USER_ID"
     }
   ]
 }
-```
+\`\`\`
 
 ---
 
@@ -286,14 +286,14 @@ Here are the live campaigns you can apply to:
 ## Response Format
 
 **Success:**
-```json
+\`\`\`json
 {"success": true, "data": {...}}
-```
+\`\`\`
 
 **Error:**
-```json
+\`\`\`json
 {"success": false, "error": "Description of error"}
-```
+\`\`\`
 
 ---
 
@@ -314,7 +314,7 @@ Here are the live campaigns you can apply to:
 
 ## Example: Full Flow
 
-```bash
+\`\`\`bash
 # 1. Register
 curl -X POST https://shiller.run/api/auth/signup \
   -H "Content-Type: application/json" \
@@ -337,7 +337,7 @@ curl "https://shiller.run/api/campaigns/apply?user_id=YOUR_USER_ID"
 curl -X PATCH https://shiller.run/api/user \
   -H "Content-Type: application/json" \
   -d '{"id":"YOUR_USER_ID","wallet_address":"YourSolanaAddress"}'
-```
+\`\`\`
 
 ---
 
