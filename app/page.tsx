@@ -25,6 +25,13 @@ export default function Home() {
 
           <div className="flex items-center gap-8">
             <a
+              href="/skill.md"
+              target="_blank"
+              className="rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white backdrop-blur-md transition-all hover:bg-white/10"
+            >
+              API Docs
+            </a>
+            <a
               href="/signup"
               className="rounded-full border border-white/10 bg-white/5 px-8 py-3 text-sm font-medium uppercase tracking-[0.15em] text-white backdrop-blur-md transition-all hover:bg-white/10"
             >
