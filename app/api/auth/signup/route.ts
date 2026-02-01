@@ -3,7 +3,9 @@ import { createClient } from "@/lib/supabase/server"
 
 export async function POST(request: Request) {
   try {
+    console.log("[v0] Signup API called")
     const { email, password, name, user_type } = await request.json()
+    console.log("[v0] Received signup request for:", email, "type:", user_type)
 
     if (!email || !password || !name) {
       return NextResponse.json(
@@ -19,16 +21,28 @@ export async function POST(request: Request) {
       )
     }
 
+    console.log("[v0] Creating Supabase client...")
     const supabase = await createClient()
+    console.log("[v0] Supabase client created successfully")
 
     // Check if email already exists
-    const { data: existing } = await supabase
+    console.log("[v0] Checking if email exists:", email.toLowerCase())
+    const { data: existing, error: checkError } = await supabase
       .from("profiles")
       .select("email")
       .eq("email", email.toLowerCase())
       .single()
 
+    if (checkError && checkError.code !== "PGRST116") {
+      console.error("[v0] Error checking email:", checkError)
+      return NextResponse.json(
+        { error: "Database error", details: checkError.message },
+        { status: 500 }
+      )
+    }
+
     if (existing) {
+      console.log("[v0] Email already exists")
       return NextResponse.json(
         { error: "Email already in use" },
         { status: 409 }
@@ -36,6 +50,7 @@ export async function POST(request: Request) {
     }
 
     // Create new user profile
+    console.log("[v0] Creating new profile...")
     const { data, error } = await supabase
       .from("profiles")
       .insert({
@@ -48,11 +63,14 @@ export async function POST(request: Request) {
       .single()
 
     if (error) {
+      console.error("[v0] Error creating profile:", error)
       return NextResponse.json(
-        { error: "Failed to create account" },
+        { error: "Failed to create account", details: error.message },
         { status: 500 }
       )
     }
+
+    console.log("[v0] Profile created successfully:", data.id)
 
     return NextResponse.json({
       success: true,
